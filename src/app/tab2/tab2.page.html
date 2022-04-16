@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="tab2.page.scss">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <h1>
+        <span>R</span>
+        <span>O</span>
+        <span>Z</span>
+        <span>K</span>
+        <span>Ł</span>
+        <span>A</span>
+        <span class="lastLetter">D</span>
+        <span>J</span>
+        <span>A</span>
+        <span>Z</span>
+        <span>D</span>
+        <span>Y</span>
+  </h1>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="container" [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Rozkład jazdy</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="kontent">
+
+    <div [ngSwitch]="szczegolyRozkladu">
+      <div *ngSwitchCase="'przystanki'">
+        Szczegóły linii {{biezacaLinia.route_id}}
+        <div class="przystanki">
+          <div *ngFor="let przystanek of przystanki0" [id]="przystanek.stop_id + 0" class="przystanki0"
+            (click)="WyswietlGodzinyOdjazdu($event)">{{przystanek.stop_name}}</div>
+        </div>
+        <div class="przystanki">
+          <div *ngFor="let przystanek of przystanki1" [id]="przystanek.stop_id + 1" class="przystanki1"
+            (click)="WyswietlGodzinyOdjazdu($event)">{{przystanek.stop_name}}</div>
+        </div>
+
+        <div id='1' (click)="Powrot($event)">Powrót do numerów linii</div>
+      </div>
+
+      <div *ngSwitchCase="'godzinyOdjazdu'">
+        Godziny odjazdu z przystanku:{{biezacyPrzystanek}}
+          <table class='table'>
+          <tbody>
+            <tr *ngFor="let png of podzieloneNaGodziny">
+              <th>{{png[0][0]}}</th>
+
+              <td *ngFor="let cell of png">
+                {{cell[1]}}
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+        <div id='2' (click)="Powrot($event)">Powrót do przystanków</div>
+      </div>
+
+      <div *ngSwitchDefault class="kontent">
+        <div *ngFor="let route of routes" class="numer_linii" (click)="WyswietlPrzystankiDlaLinii(route)">
+          {{route.route_id}}
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+</ion-content>
